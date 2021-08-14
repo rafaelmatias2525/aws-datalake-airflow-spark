@@ -16,7 +16,7 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 echo "==================================="
 echo "Cloning repository"
 echo "==================================="
-sudo git clone https://github.com/rafaelmatias2525/api-conversao.git
+sudo git clone https://github.com/rafaelmatias2525/aws-datalake-airflow-spark.git
 echo "==================================="
 echo "End of server-bootstrap script!"
 echo "==================================="
