@@ -17,6 +17,18 @@ echo "==================================="
 echo "Cloning repository"
 echo "==================================="
 sudo git clone https://github.com/rafaelmatias2525/aws-datalake-airflow-spark.git
+# echo "==================================="
+# echo "Change permissions"
+# echo "==================================="
+# find -type f -exec chmod 644 {} \;
+# find -type d -exec chmod 755 {} \;
+echo "==================================="
+echo "Airflow init"
+echo "==================================="
+cd aws-datalake-airflow-spark/airflow/
+# echo "AIRFLOW_UID=$(id -u)\nAIRFLOW_GID=0" > .env
+# docker-compose up airflow-init
+docker-compose up -d
 echo "==================================="
 echo "End of server-bootstrap script!"
 echo "==================================="
