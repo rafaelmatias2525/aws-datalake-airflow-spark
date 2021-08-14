@@ -17,7 +17,8 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_instance" "airflow" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t2.micro"
+  # instance_type = "t2.micro"
+  instance_type = "t3.medium"
   key_name                    = var.key_pair_name
   associate_public_ip_address = true
   security_groups             = [aws_security_group.airflow_sg.id]
@@ -42,9 +43,10 @@ resource "aws_instance" "airflow" {
 
   provisioner "remote-exec" {
     inline = [
-      "chmod +x /tmp/server-bootstrap.sh",
-      "/tmp/server-bootstrap.sh",
+      "sudo chmod +x /tmp/server-bootstrap.sh",
+      "sudo /tmp/server-bootstrap.sh",
     ]
+    
 
     connection {
       type        = "ssh"
