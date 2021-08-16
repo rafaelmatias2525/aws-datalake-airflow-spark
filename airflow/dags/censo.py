@@ -1,6 +1,6 @@
+import boto3
 from airflow.decorators import dag, task
 from airflow.utils.dates import days_ago
-import boto3
 from airflow.models import Variable
 
 aws_access_key_id = Variable.get("aws_access_key_id")
@@ -26,14 +26,15 @@ default_args = {
 def pipeline_censo():
 
     @task
-    def emr_process_enem_data():
+    def emr_process_censo_data():
         cluster_id = emr_client.run_job_flow(
             Name='EMR-Censo-Pipeline',
             ServiceRole='EMR_DefaultRole',
             JobFlowRole='EMR_EC2_DefaultRole',
             VisibleToAllUsers=True,
             LogUri='s3://aws-emr-resources-167976530548-us-east-1/emr-logs',
-            ReleaseLabel='emr-6.1.0',
+            # ReleaseLabel='emr-6.1.0',
+            ReleaseLabel='emr-6.3.0',
             Instances={
                 'InstanceGroups': [
                     {
@@ -140,7 +141,7 @@ def pipeline_censo():
 
 
     # Encadeando a pipeline
-    cluid = emr_process_enem_data()
+    cluid = emr_process_censo_data()
     res_emr = wait_emr_step(cluid)
     res_ter = terminate_emr_cluster(res_emr, cluid)
 

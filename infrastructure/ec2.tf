@@ -21,7 +21,8 @@ resource "aws_instance" "airflow" {
   instance_type = "t3.medium"
   key_name                    = var.key_pair_name
   associate_public_ip_address = true
-  security_groups             = [aws_security_group.airflow_sg.id]
+  # security_groups             = [aws_security_group.airflow_sg.id]
+  vpc_security_group_ids      = [aws_security_group.airflow_sg.id]
   subnet_id                   = var.airflow_subnet_id
 
   tags = {
@@ -67,7 +68,7 @@ resource "aws_security_group" "airflow_sg" {
 
   ingress {
     description      = "Webserver interface"
-    from_port        = 8080
+    from_port        = 80
     to_port          = 8080
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
