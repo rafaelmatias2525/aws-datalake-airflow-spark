@@ -7,8 +7,8 @@ logger = get_logger()
 
 # Upload a file to S3
 s3_client = boto3.client('s3')
-file_path = "data/test/logo512.png"
-bucket_name = "datalake-edc-167976530548"
+file_path = "../data/test/logo512.png"
+bucket_name = "datalake-edc-raw-data"
 object_name = "test-area/logo512.png"
 
 try:

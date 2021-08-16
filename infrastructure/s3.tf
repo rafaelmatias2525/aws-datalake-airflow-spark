@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "datalake-edc" {
-  bucket = "datalake-edc-167976530548"
+  bucket = "datalake-edc-staging-zone"
   acl    = "private"
 
   tags = {
